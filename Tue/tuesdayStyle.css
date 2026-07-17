@@ -1,0 +1,610 @@
+        /* =========================================================
+                           GLOBAL SETTINGS
+        ========================================================= */
+        :root {
+            --background: #ff6600;
+            --line: #D6DCE3;
+            --white: #FFFFFF;
+
+        }
+        * {
+            box-sizing: border-box;
+        }
+
+        html,
+        body {
+            width: 100%;
+            height: 100%;
+            margin: 0;
+        }
+
+        body {
+            overflow: hidden;
+
+            background-color: #e9edf2;
+            color: #1f2937;
+
+            font-family:
+                Arial,
+                Helvetica,
+                sans-serif;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        button,
+        a {
+            font: inherit;
+        }
+
+        /* =========================================================
+                           MAIN PAGE LAYOUT
+        ========================================================= */
+
+        #container {
+            display: grid;
+
+            width: 100%;
+            height: 100vh;
+
+            grid-template-rows: 185px minmax(0, 1fr);
+
+            overflow: hidden;
+        }
+
+        /* =========================================================
+                           DAY SELECTOR
+        ========================================================= */
+
+        #day-selector {
+            display: grid;
+
+            grid-template-rows:
+                85px
+                50px
+                50px;
+
+            background-color: #1f2937;
+            color: #ffffff;
+
+            border-bottom: 1px solid #111827;
+        }
+
+        #current-day {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            background-color: #172033;
+        }
+
+        #current-day h1 {
+            margin: 0;
+
+            font-size: 34px;
+            letter-spacing: 0.5px;
+        }
+
+        #weekend-nav {
+            display: grid;
+            grid-template-columns: 1fr 80px 1fr;
+            align-items: center;
+
+            background-color: #263244;
+
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        #weekday-nav {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+
+            background-color: #334155;
+        }
+
+        .day-link {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            min-width: 0;
+            height: 100%;
+
+            padding: 8px 12px;
+
+            color: #e5e7eb;
+
+            font-size: 18px;
+            font-weight: 700;
+            text-align: center;
+
+            border-right: 1px solid rgba(255, 255, 255, 0.08);
+
+            transition:
+                background-color 0.2s ease,
+                color 0.2s ease;
+        }
+
+        .day-link:last-child {
+            border-right: none;
+        }
+
+        .day-link:hover {
+            background-color: #475569;
+            color: #ffffff;
+        }
+
+        .day-link.active {
+            background-color: #0f5f8f;
+            color: #ffffff;
+        }
+        #home-page {
+            width: 20px;
+            height: 20px;
+            background-color: orangered;
+        }
+
+        #home-page:hover {
+            background-color: #dbeafe;
+            transform: translateY(-1px);
+        }
+
+        /* =========================================================
+                           DASHBOARD CONTENT
+        ========================================================= */
+
+        #dashboard {
+            display: grid;
+
+            min-height: 0;
+
+            grid-template-columns:
+                minmax(500px, 1.35fr)
+                minmax(360px, 1fr);
+
+            overflow: hidden;
+        }
+
+        /* =========================================================
+                           SHIPPING SCHEDULE
+        ========================================================= */
+
+        #shipping-schedule {
+            display: grid;
+
+            min-width: 0;
+            min-height: 0;
+
+            grid-template-rows:
+                95px
+                minmax(0, 1fr);
+
+            background-color: #f8fafc;
+
+            border-right: 1px solid #cbd5e1;
+        }
+
+        #schedule-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            padding: 18px 24px;
+
+            background-color: #0f4c6e;
+            color: #ffffff;
+
+            border-bottom: 1px solid #0b3a54;
+        }
+
+        #schedule-title {
+            margin: 0;
+
+            font-size: 25px;
+            font-weight: 800;
+            line-height: 1.15;
+        }
+
+        #schedule-subtitle {
+            margin: 6px 0 0;
+
+            color: #dbeafe;
+
+            font-size: 14px;
+        }
+
+        #trailer-count {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+
+            min-width: 82px;
+
+            padding: 10px 14px;
+
+            background-color: rgba(255, 255, 255, 0.12);
+
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            border-radius: 7px;
+        }
+
+        #trailer-count strong {
+            font-size: 22px;
+        }
+
+        #trailer-count span {
+            margin-top: 2px;
+
+            color: #dbeafe;
+
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        /* This is the only area that scrolls */
+
+        .schedule-scroll-area {
+            min-height: 0;
+
+            overflow-y: auto;
+            overflow-x: hidden;
+
+            background-color: #eef2f6;
+
+            scrollbar-width: thin;
+            scrollbar-color: #94a3b8 #e2e8f0;
+        }
+
+        .schedule-scroll-area::-webkit-scrollbar {
+            width: 11px;
+        }
+
+        .schedule-scroll-area::-webkit-scrollbar-track {
+            background-color: #e2e8f0;
+        }
+
+        .schedule-scroll-area::-webkit-scrollbar-thumb {
+            background-color: #94a3b8;
+
+            border: 3px solid #e2e8f0;
+            border-radius: 10px;
+        }
+
+        .schedule-scroll-area::-webkit-scrollbar-thumb:hover {
+            background-color: #64748b;
+        }
+
+        /* Column headings remain visible while rows scroll */
+
+        .schedule-column-header {
+            position: sticky;
+            top: 0;
+            z-index: 5;
+
+            display: grid;
+            grid-template-columns:
+                1.2fr
+                1fr
+                1fr;
+
+            min-height: 52px;
+
+            background-color: #dbe3ec;
+            color: #334155;
+
+            border-bottom: 1px solid #bcc8d5;
+        }
+
+        .column-heading {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            padding: 10px;
+
+            font-size: 14px;
+            font-weight: 800;
+            text-align: center;
+            text-transform: uppercase;
+            letter-spacing: 0.4px;
+
+            border-right: 1px solid #c5d0dc;
+        }
+
+        .column-heading:last-child {
+            border-right: none;
+        }
+
+        #trailer-list {
+            display: block;
+        }
+
+        .trailer-log {
+            display: grid;
+            grid-template-columns:
+                1.2fr
+                1fr
+                1fr;
+
+            min-height: 82px;
+
+            background-color: #ffffff;
+
+            border-bottom: 1px solid #d6dee7;
+        }
+
+        .trailer-log:nth-child(even) {
+            background-color: #f8fafc;
+        }
+
+        .trailer-log:hover {
+            background-color: #edf6fc;
+        }
+
+        .schedule-cell {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+
+            min-width: 0;
+
+            margin: 0;
+            padding: 12px 10px;
+
+            text-align: center;
+
+            border-right: 1px solid #e2e8f0;
+        }
+
+        .schedule-cell:last-child {
+            border-right: none;
+        }
+
+        .schedule-label {
+            color: #1f2937;
+
+            font-size: 17px;
+            font-weight: 800;
+        }
+
+        .schedule-value {
+            margin-top: 6px;
+
+            color: #64748b;
+
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .carrier-name {
+            color: #0f4c6e;
+        }
+
+        .status-badge {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+
+            margin-top: 6px;
+            padding: 4px 9px;
+
+            background-color: #e0f2fe;
+            color: #075985;
+
+            border-radius: 999px;
+
+            font-size: 12px;
+            font-weight: 800;
+        }
+        .status-badge-important {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+
+            margin-top: 6px;
+            padding: 4px 9px;
+
+            background-color: var(--background);
+            color: var(--white);
+
+            border-radius: 999px;
+
+            font-size: 12px;
+            font-weight: 800;
+        }
+
+        /* =========================================================
+                           RIGHT-SIDE PANELS
+        ========================================================= */
+
+        #carrier-panels {
+            display: grid;
+
+            min-width: 0;
+            min-height: 0;
+
+            grid-template-rows:
+                2fr
+                1fr
+                1fr;
+
+            overflow: hidden;
+
+            background-color: #dbe1e8;
+        }
+
+        .carrier-panel {
+            display: flex;
+            flex-direction: column;
+
+            min-height: 0;
+
+            background-color: #ffffff;
+
+            border-bottom: 1px solid #cbd5e1;
+        }
+
+        .carrier-panel:last-child {
+            border-bottom: none;
+        }
+
+        .panel-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            min-height: 56px;
+
+            padding: 14px 20px;
+
+            background-color: #273548;
+            color: #ffffff;
+
+            border-bottom: 1px solid #1e293b;
+        }
+
+        .panel-header h2 {
+            margin: 0;
+
+            font-size: 21px;
+            letter-spacing: 0.3px;
+        }
+
+        .panel-status {
+            padding: 5px 9px;
+
+            background-color: #e2e8f0;
+            color: #334155;
+
+            border-radius: 999px;
+
+            font-size: 12px;
+            font-weight: 800;
+        }
+
+        .information-card {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+
+            min-width: 0;
+
+            padding: 14px;
+
+            background-color: #ffffff;
+
+            border: 1px solid #d8e0e8;
+            border-radius: 7px;
+
+            box-shadow: 0 1px 2px rgba(15, 23, 42, 0.06);
+        }
+        .side-panels-schedule{
+            display: grid;
+            grid-template-columns:
+                1.2fr
+                1fr
+                1fr;
+
+            max-height: 60px ;
+
+            background-color: #ffffff;
+
+            border-bottom: 1px solid #d6dee7;
+        }
+
+        /* Professional carrier accents */
+        .imporant {
+            border-left: 6px solid var(--background);
+        }
+        #fedex-panel .panel-header {
+            border-left: 6px solid #6d28d9;
+        }
+
+        #ontrac-panel .panel-header {
+            border-left: 6px solid #dc2626;
+        }
+
+        #jitsu-panel .panel-header {
+            border-left: 6px solid #0f766e;
+        }
+
+        /* =========================================================
+                           RESPONSIVE DESIGN
+        ========================================================= */
+
+        @media (max-width: 900px) {
+            body {
+                overflow: auto;
+            }
+
+            #container {
+                height: auto;
+                min-height: 100vh;
+
+                grid-template-rows: auto auto;
+
+                overflow: visible;
+            }
+
+            #dashboard {
+                grid-template-columns: 1fr;
+
+                overflow: visible;
+            }
+
+            #shipping-schedule {
+                height: 650px;
+
+                border-right: none;
+                border-bottom: 1px solid #cbd5e1;
+            }
+
+            #carrier-panels {
+                grid-template-rows: repeat(3, minmax(230px, auto));
+
+                overflow: visible;
+            }
+        }
+
+        @media (max-width: 650px) {
+            #day-selector {
+                grid-template-rows: auto auto auto;
+            }
+
+            #current-day {
+                min-height: 75px;
+            }
+
+            #weekend-nav {
+                grid-template-columns: 1fr 60px 1fr;
+            }
+
+            #weekday-nav {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            #weekday-nav .day-link:last-child {
+                grid-column: 1 / -1;
+            }
+
+            .day-link {
+                min-height: 48px;
+
+                font-size: 15px;
+            }
+
+            #dashboard {
+                min-width: 620px;
+            }
+
+            body {
+                overflow-x: auto;
+            }
+        }
